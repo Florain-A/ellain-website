@@ -1,8 +1,8 @@
-import { Component, ElementRef,
-  afterNextRender,
-  inject,
-  viewChild} from '@angular/core';
-  import gsap from 'gsap';
+import {
+  Component, AfterViewInit
+} from '@angular/core';
+
+import gsap from 'gsap';
 
 @Component({
   selector: 'app-hero',
@@ -10,28 +10,37 @@ import { Component, ElementRef,
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
-export class Hero {
-  hero = viewChild<ElementRef>('heroSection');
-//  hero = viewChild<ElementRef>('heroSection'); is viewchild decorator that
-//  allows you to access the DOM element with the template reference variable #heroSection in your component class. It is used to get a reference to the hero section of the component's template, which can be useful for manipulating the DOM or accessing its properties.
-  constructor() {
-    afterNextRender(() => {
+export class HeroComponent implements AfterViewInit {
 
-        const hero = this.hero()?.nativeElement;
+ngAfterViewInit(): void{
+gsap.from('.room-image', {
+  scale: 1.08,
+  opacity: 0,
+  duration: 2,
+  ease: 'power2.out'
+});
 
-        if (!hero) return;
+gsap.from('.subtitle', {
+  y: 20,
+  opacity: 0,
+  duration: 0.8,
+  delay: 0.5
+});
 
-        gsap.from(hero, {
+gsap.from('h1', {
+  y: 40,
+  opacity: 0,
+  duration: 1,
+  delay: 0.6
+});
 
-            opacity: 0,
+gsap.from('.hero p', {
+  y: 20,
+  opacity: 0,
+  duration: 0.8,
+  delay: 1.0
+});
+  //animates fast start slow end
 
-            duration: 1.2,
-
-            y: 80,
-
-            ease: "power3.out"
-
-        });
-
-    });}
+}
 }

@@ -42,4 +42,22 @@
 
   --transition-fast: .25s ease;
   --transition-normal: .4s ease;
+  /* ===== SPACING ===== */
+
+--space-xs: 0.5rem;
+--space-sm: 1rem;
+--space-md: 1.5rem;
+--space-lg: 2rem;
+--space-xl: 3rem;
+--space-2xl: 5rem;
+
+/* ===== Z-INDEX ===== */
+
+--z-content: 1;
+--z-header: 100;
+--z-overlay: 1000;
+
+/* ===== HEADER ===== */
+
+--header-height: 80px;
 }
