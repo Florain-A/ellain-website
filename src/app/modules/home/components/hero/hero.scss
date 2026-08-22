@@ -8,6 +8,9 @@
   position: relative;
   height: 100vh;
   overflow: hidden;
+  /* Crucial: Establishes a 3D perspective field for architectural depth */
+  perspective: 1200px; 
+  perspective-origin: 50% 40%;
 }
 
 .room-image {
@@ -17,11 +20,11 @@
   display: block;
 }
 
+/* Room shading overlay */
 .room-container::after {
   content: "";
   position: absolute;
   inset: 0;
-
   background: linear-gradient(
     90deg,
     rgba(15,17,21,.75) 0%,
@@ -29,50 +32,90 @@
     rgba(15,17,21,.10) 70%,
     rgba(15,17,21,0) 100%
   );
+  z-index: 2; /* Sits behind the text content but over structural assets */
+  pointer-events: none;
 }
 
+/* --- LAYERED INTERIOR ASSETS --- */
+
+.ceiling {
+    position: absolute;
+    /* Anchors to the top concrete recess zone */
+    top: 0;
+    left: 11.5%; 
+    width: 77%;
+    height: 38%;
+    object-fit: fill;
+    z-index: 1;
+    pointer-events: none;
+
+    /* Architectural 3D perspective mapping */
+    transform-origin: top center;
+    transform: rotateX(-51deg) scaleY(1.15) scaleX(1.02);
+}
+
+.curtains {
+    position: absolute;
+    top: 18.5%;
+    left: 26%;
+    width: 42%;
+    height: 48%;
+    object-fit: fill;
+    z-index: 1;
+    pointer-events: none;
+    clip-path: inset(10% 0% 12% 0%);
+}
+
+/* 🟢 CHANGED: Replaced the old '.sofa' rule with this full overlay structure */
+.furniture-group {
+      position: absolute;
+    top: 9px;
+    left: 0;
+    width: 96%;
+    height: 97%;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 1;
+    pointer-events: none;
+
+}
+
+/* --- HERO TEXT UI --- */
 .hero-content {
   position: absolute;
-
-  top: 56%;
+  top: 50%;
   left: 8%;
-
   transform: translateY(-50%);
-
-  z-index: 2;
-
+  z-index: 4; /* Keeps text completely crisp and above all image animations */
   max-width: 520px;
 }
 
 .subtitle {
   display: inline-block;
-
   margin-bottom: 2rem;
-
   letter-spacing: .25rem;
-
   color: var(--color-primary);
-
   font-size: .85rem;
 }
 
 .hero h1 {
   font-family: var(--font-heading);
-  font-size: clamp(4rem, 7vw, 7rem);
-
-  line-height: .95;
-
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  line-height: 1.05;
   color: var(--color-text);
-
   margin-bottom: 2rem;
 }
 
 .hero p {
   max-width: 420px;
-
   color: var(--color-muted);
-
   font-size: 1.1rem;
-
   line-height: 1.8;
+}
+
+.scroll-indicator {
+    margin-top: 4rem;
+    color: var(--color-primary);
+    font-size: .95rem;
+    letter-spacing: .2rem;
 }
