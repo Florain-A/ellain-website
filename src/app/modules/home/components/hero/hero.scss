@@ -1,17 +1,21 @@
 .hero {
-  min-height: 100vh;
-  background: var(--color-background);
+  position: relative;
   width: 100%;
+  height: 100vh;          /* Locks the section framework strictly to viewport height */
+  overflow: hidden;       /* Prevents elements from repeating or clipping downward */
+  background: var(--color-background);
 }
 
 .room-container {
-  position: relative;
+  position: absolute;    /* Changes from relative to absolute to maintain alignment during pin release */
+  inset: 0;               /* Covers the parent .hero node bounds exactly */
+  width: 100%;
   height: 100vh;
   overflow: hidden;
-  /* Crucial: Establishes a 3D perspective field for architectural depth */
   perspective: 1200px; 
   perspective-origin: 50% 40%;
 }
+
 
 .room-image {
   width: 100%;
@@ -66,7 +70,6 @@
     clip-path: inset(10% 0% 12% 0%);
 }
 
-/* 🟢 CHANGED: Replaced the old '.sofa' rule with this full overlay structure */
 .furniture-group {
       position: absolute;
     top: 9px;
